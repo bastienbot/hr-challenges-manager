@@ -1,7 +1,0 @@
-Bonjour {{firstname}},
-
-Comme convenu précédement tu as du recevoir un accès à un repo contenant un petit exercice à faire. Dans un premier temps, merci de simplement accuser réception des accès, afin qu'en cas de problème nous puissions le régler rapidement!
-
-Merci
-
-{{signature}}

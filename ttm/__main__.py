@@ -4,6 +4,7 @@ from classes.candidate import Candidate
 from services.gitlab import Gitlab
 from services.files import FileInterface
 from services.cli_options import Arguments
+from services.email import EmailSender
 
 
 args = Arguments.get_arguments()
@@ -18,6 +19,6 @@ if args["send"]:
         "email": args["<email>"],
         "job": args["<job>"]
     })
-    candidate.create()
-    TestInterface.send_test(candidate)
-
+    # candidate.create()
+    # TestInterface.send_test(candidate)
+    EmailSender.send(candidate)

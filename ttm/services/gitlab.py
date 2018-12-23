@@ -20,8 +20,8 @@ class Gitlab:
             json={
                 "email": user.email,
                 "reset_password": True,
-                "username": "{}.{}.external".format(user.firstname, user.lastname),
-                "name": "{}.{}.external".format(user.firstname, user.lastname),
+                "username": user.username,
+                "name": user.username,
                 "can_create_group": False,
                 "external": True
             })
@@ -31,8 +31,11 @@ class Gitlab:
     def create_candidate(self, candidate):
         self.create_user(candidate, external=True)
 
-    def fork_project(self, project_id):
+    def fork_project_to_namespace(self, project_id, namespace):
         r = requests.post(
             url="{}/projects/{}/fork".format(self.url, project_id),
-            headers=self.headers)
+            headers=self.headers,
+            json={
+                "namespace": namespace
+            })
         print(r.content)

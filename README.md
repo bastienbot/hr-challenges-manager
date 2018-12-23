@@ -9,8 +9,8 @@ pip install -r requirement.txt
 
 Copy and fill in the following files according to your needs :
 - .env.exemple -> .env (your env constants)
-- tt-informations.exemple.yaml -> tt-informations.exemple.yaml (informations about your tests repos)
-- templates/\*.exemple.txt -> templates/\*.txt (email templates)
+- tt-informations.yaml.exemple -> tt-informations.yaml (informations about your tests repos)
+- templates/\*.html.exemple -> templates/\*.html (email templates)
 
 ## Usage:
   ```

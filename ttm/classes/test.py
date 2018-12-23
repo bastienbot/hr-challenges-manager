@@ -9,5 +9,4 @@ class TestInterface:
         gitlab_api.create_candidate(candidate)
         tt_informations = load_tt_informations()
         project_id = tt_informations[candidate.job]["id"]
-        gitlab_api.fork_project(project_id)
-        # gitlab.transfer_ownership()
+        gitlab_api.fork_project_to_namespace(project_id, candidate.username)
