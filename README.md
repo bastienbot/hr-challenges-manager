@@ -1,4 +1,4 @@
-# Technical test Manager
+# Technical tests Manager
 
 ## Installation
 ```
