@@ -16,7 +16,7 @@ class Candidate:
             path="candidates/{}/profile.json".format(self.email),
             content="{}".format(json.dumps(self.__dict__))
         )
-        print("User not yet created")
+        print("User created successfuly")
 
     def remove(self):
         print("User not yet removed")

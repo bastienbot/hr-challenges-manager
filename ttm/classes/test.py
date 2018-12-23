@@ -1,7 +1,9 @@
 import json
+from services.gitlab import Gitlab
 
 
 class TestInterface:
 
     def send_test(candidate):
-        print("Test sent !")
+        gitlab_api = Gitlab()
+        gitlab_api.create_candidate(candidate)
