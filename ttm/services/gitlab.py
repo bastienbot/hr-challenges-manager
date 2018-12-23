@@ -4,10 +4,11 @@ import requests
 
 class Gitlab:
 
+    GITLAB_TOKEN = os.getenv("GITLAB_TOKEN")
+    GITLAB_URL = os.getenv("GITLAB_URL")
+    GITLAB_URI = "/api/v4"
+
     def __init__(self):
-        self.GITLAB_TOKEN = os.getenv("GITLAB_TOKEN")
-        self.GITLAB_URL = os.getenv("GITLAB_URL")
-        self.GITLAB_URI = "/api/v4"
         self.url = "{}{}".format(self.GITLAB_URL, self.GITLAB_URI)
         self.headers = {'Private-Token': self.GITLAB_TOKEN}
 

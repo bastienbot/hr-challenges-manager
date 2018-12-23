@@ -1,4 +1,4 @@
-from settings import import_env
+import settings
 from classes.test import TestInterface
 from classes.candidate import Candidate
 from services.gitlab import Gitlab
@@ -6,7 +6,6 @@ from services.files import FileInterface
 from services.cli_options import Arguments
 
 
-env = import_env()
 args = Arguments.get_arguments()
 # print(args)
 
