@@ -8,6 +8,7 @@ class Candidate:
         self.firstname = informations["firstname"]
         self.lastname = informations["lastname"]
         self.email = informations["email"]
+        self.job = informations["job"]
         self.phone = ""
 
     def create(self):

@@ -13,14 +13,26 @@ class Gitlab:
         self.headers = {'Private-Token': self.GITLAB_TOKEN}
 
     def create_user(self, user, external=False):
-        r = requests.get("{}/projects".format(self.url), headers=self.headers)
+        # TODO: We should check if the username is free before sending
+        r = requests.post(
+            url="{}/users".format(self.url),
+            headers=self.headers,
+            json={
+                "email": user.email,
+                "reset_password": True,
+                "username": "{}.{}.external".format(user.firstname, user.lastname),
+                "name": "{}.{}.external".format(user.firstname, user.lastname),
+                "can_create_group": False,
+                "external": True
+            })
         print(r.content)
-        # r = requests.post(
-        #     "{}/detect_vary_templates".format(self.host),
-        #     json={"text": "Qui est le boss",
-        #           "templates": datas.templates})
-        # self.assertEqual(r.status_code, 200)
         # res = json.loads(r.content)
 
     def create_candidate(self, candidate):
         self.create_user(candidate, external=True)
+
+    def fork_project(self, project_id):
+        r = requests.post(
+            url="{}/projects/{}/fork".format(self.url, project_id),
+            headers=self.headers)
+        print(r.content)

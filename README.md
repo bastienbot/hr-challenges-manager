@@ -9,7 +9,7 @@ pip install -r requirement.txt
 
 ## Usage:
   ```
-  python ttm send <firstname> <lastname> <email> (back|front|ds)...
+  python ttm send <firstname> <lastname> <email> (backenv|frontend|ds)...
   python ttm show <email>
   python ttm remove <email>
   ```

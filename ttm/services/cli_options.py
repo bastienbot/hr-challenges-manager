@@ -1,7 +1,7 @@
 """Technical test Manager
 
 Usage:
-  ttm send <firstname> <lastname> <email> (back|front|ds)...
+  ttm send <firstname> <lastname> <email> <job>
   ttm show <email>
   ttm remove <email>
 

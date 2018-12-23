@@ -15,7 +15,9 @@ if args["send"]:
     candidate = Candidate({
         "firstname": args["<firstname>"],
         "lastname": args["<lastname>"],
-        "email": args["<email>"]
+        "email": args["<email>"],
+        "job": args["<job>"]
     })
-    # candidate.create()
+    candidate.create()
     TestInterface.send_test(candidate)
+
