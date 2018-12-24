@@ -1,6 +1,5 @@
 import os
 import smtplib
-from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -12,14 +11,13 @@ class EmailSender:
     EMAIL_HOST_PASSWORD = os.getenv("SES_PASSWORD")
     EMAIL_PORT = 587
 
-    def send(candidate):
+    def send(candidate, template):
         message = MIMEMultipart('alternative')
         message['Subject'] = "Clevy technical test"
         message['From'] = "bastien@clevy.io"
         message['To'] = candidate.email
 
-        path = Path.cwd() / 'templates' / 'new_test.html'
-        html = open(path).read()
+        html = template.get_template()
         mime_text = MIMEText(html, 'html')
         message.attach(mime_text)
 

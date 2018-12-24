@@ -1,4 +1,5 @@
 import settings
+from classes.template import Template
 from classes.test import TestInterface
 from classes.candidate import Candidate
 from services.gitlab import Gitlab
@@ -8,7 +9,6 @@ from services.email import EmailSender
 
 
 args = Arguments.get_arguments()
-# print(args)
 
 FileInterface.create_directory("candidates")
 
@@ -19,6 +19,8 @@ if args["send"]:
         "email": args["<email>"],
         "job": args["<job>"]
     })
-    # candidate.create()
-    # TestInterface.send_test(candidate)
-    EmailSender.send(candidate)
+    candidate.create()
+    TestInterface.send_test(candidate)
+    template = Template(name="new_test", candidate=candidate)
+    EmailSender.send(candidate, template)
+    print("All done !")

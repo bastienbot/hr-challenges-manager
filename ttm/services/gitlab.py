@@ -1,5 +1,6 @@
 import os
 import requests
+from time import sleep
 
 
 class Gitlab:
@@ -26,7 +27,6 @@ class Gitlab:
                 "external": True
             })
         print(r.content)
-        # res = json.loads(r.content)
 
     def create_candidate(self, candidate):
         self.create_user(candidate, external=True)

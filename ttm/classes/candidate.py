@@ -10,7 +10,7 @@ class Candidate:
         self.email = informations["email"]
         self.job = informations["job"]
         self.phone = ""
-        self.username = "{}.{}.external".format(self.firstname, self.lastname)
+        self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
 
     def create(self):
         FileInterface.create_directory("candidates/{}".format(self.email))
