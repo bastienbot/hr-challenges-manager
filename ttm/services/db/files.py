@@ -40,7 +40,7 @@ class DBFiles(DBBase):
     def save_template(self, candidate, template):
         DBFiles.create_candidate_folder_if_not_exists(candidate)
         DBFiles.create_file_with_content(
-            path="candidates/{}/{}-{}.json".format(
+            path="candidates/{}/{}-{}.html".format(
                 candidate.email,
                 time(),
                 template.name
@@ -48,6 +48,11 @@ class DBFiles(DBBase):
             content=template.get_template()
         )
         return candidate
+
+    def get_profile_by_email(self, email):
+        path = "candidates/{}/profile.json".format(email)
+        raw_profile = open(path).read()
+        return json.loads(raw_profile)
 
     """
     @desc Creates a candidate directory if it does not exist already

@@ -17,7 +17,7 @@ class Candidate:
         self.job = informations["job"]
         self.phone = ""
         self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
-        self.db = DBConnector(db_type="file")
+        self.db = DBConnector()
 
     def get_profile(self):
         return {
@@ -35,3 +35,15 @@ class Candidate:
 
     def remove(self):
         print("User not yet removed")
+
+    """
+    @desc Get the candidate profile and returns an instance of Candidate
+
+    @params email: str
+    @returns instance of Candidate
+    """
+    @staticmethod
+    def load_candidate(email):
+        db = DBConnector()
+        profile = db.get_profile_by_email(email)
+        return Candidate(profile)

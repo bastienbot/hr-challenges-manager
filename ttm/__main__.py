@@ -21,3 +21,6 @@ if args["send"]:
     template.send_template()
     template.save_template()
     print("All done !")
+elif args["show"]:
+    candidate = Candidate.load_candidate(args["<email>"])
+    print(candidate.get_profile())

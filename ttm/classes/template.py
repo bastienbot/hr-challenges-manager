@@ -11,7 +11,7 @@ class Template:
         self.rawtext = str
         self.signature = self.load_file("signature")
         self.finaltext = self.prepare_final_text(name)
-        self.db = DBConnector(db_type="file")
+        self.db = DBConnector()
 
     def get_template(self):
         return self.finaltext
