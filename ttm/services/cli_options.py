@@ -3,7 +3,7 @@
 Usage:
   ttm send <firstname> <lastname> <email> <job>
   ttm show <email>
-  ttm remove <email>
+  ttm delete <email>
 
 Options:
   -h --help     Show this screen.

@@ -30,6 +30,10 @@ class DBFiles(DBBase):
         )
         return candidate
 
+    def delete_candidate(self, candidate):
+        path = "candidates/{}".format(candidate.email)
+        DBFiles.delete_directory(path)
+
     """
     @desc Saves the sent email
 
@@ -64,9 +68,13 @@ class DBFiles(DBBase):
         DBFiles.create_directory("candidates/{}".format(candidate.email))
 
     @staticmethod
-    def create_directory(name):
-        if not os.path.isdir("./{}".format(name)):
-            os.makedirs("./{}".format(name))
+    def create_directory(path):
+        if not os.path.isdir("./{}".format(path)):
+            os.makedirs("./{}".format(path))
+
+    @staticmethod
+    def delete_directory(path):
+        shutil.rmtree("./{}".format(path))
 
     @staticmethod
     def create_file_with_content(path, content):

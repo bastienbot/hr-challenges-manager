@@ -33,8 +33,9 @@ class Candidate:
         self.db.create_candidate(self)
         print("User created successfuly")
 
-    def remove(self):
-        print("User not yet removed")
+    def delete(self):
+        self.db.delete_candidate(self)
+        print("User deleted successfuly")
 
     """
     @desc Get the candidate profile and returns an instance of Candidate

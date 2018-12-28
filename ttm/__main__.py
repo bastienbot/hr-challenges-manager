@@ -24,3 +24,6 @@ if args["send"]:
 elif args["show"]:
     candidate = Candidate.load_candidate(args["<email>"])
     print(candidate.get_profile())
+elif args["delete"]:
+    candidate = Candidate.load_candidate(args["<email>"])
+    candidate.delete()

@@ -4,8 +4,8 @@
 This program allows you to register a new candidate, send the candidate the technical test (on gitlab: creates user, fork the test repository to his/her namespace, send the candidate an email with instructions), and save the email.
 
 Upcoming:
-- remove candidate
-- show candidate
+- delete candidate
+- show candidate infos
 - set and get reminders so you can sent an email to a candidate who did not deliver his test result on time for instance
 
 ## Installation
@@ -24,7 +24,7 @@ Copy and fill in the following files according to your needs :
   ```
   python ttm send <firstname> <lastname> <email> <job>
   python ttm show <email>
-  python ttm remove <email>
+  python ttm delete <email>
   ```
 
 ## Options:
