@@ -3,14 +3,11 @@ from classes.template import Template
 from classes.test import TestInterface
 from classes.candidate import Candidate
 from services.gitlab import Gitlab
-from services.files import FileInterface
 from services.cli_options import Arguments
 from services.email import EmailSender
 
 
 args = Arguments.get_arguments()
-
-FileInterface.create_directory("candidates")
 
 if args["send"]:
     candidate = Candidate({
