@@ -1,4 +1,6 @@
 from pathlib import Path
+from services.db import DBConnector
+from services.email import EmailSender
 
 
 class Template:
@@ -9,6 +11,7 @@ class Template:
         self.rawtext = str
         self.signature = self.load_file("signature")
         self.finaltext = self.prepare_final_text(name)
+        self.db = DBConnector(db_type="file")
 
     def get_template(self):
         return self.finaltext
@@ -28,3 +31,11 @@ class Template:
         finaltext = finaltext.replace("{{job}}", self.candidate.job)
         finaltext = finaltext.replace("{{signature}}", self.signature)
         return finaltext
+
+    # TODO: Here it is weird to pass the template and teh candidate
+    # since the candidate is sanved in self
+    def send_template(self):
+        EmailSender.send(self.candidate, self.get_template())
+
+    def save_template(self):
+        self.db.save_template(self.candidate, self)

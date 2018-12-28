@@ -11,13 +11,20 @@ class EmailSender:
     EMAIL_HOST_PASSWORD = os.getenv("SES_PASSWORD")
     EMAIL_PORT = 587
 
-    def send(candidate, template):
+    """
+    @desc Sends an email with an html body to a candidate through SES
+
+    @params candidate: instance of Candidate
+    @params content: str
+    @returns
+    """
+    def send(candidate, content):
         message = MIMEMultipart('alternative')
         message['Subject'] = "Clevy technical test"
         message['From'] = "bastien@clevy.io"
         message['To'] = candidate.email
 
-        html = template.get_template()
+        html = content
         mime_text = MIMEText(html, 'html')
         message.attach(mime_text)
 

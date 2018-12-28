@@ -4,7 +4,6 @@ from classes.test import TestInterface
 from classes.candidate import Candidate
 from services.gitlab import Gitlab
 from services.cli_options import Arguments
-from services.email import EmailSender
 
 
 args = Arguments.get_arguments()
@@ -19,5 +18,6 @@ if args["send"]:
     candidate.create()
     TestInterface.send_test(candidate)
     template = Template(name="new_test", candidate=candidate)
-    EmailSender.send(candidate, template)
+    template.send_template()
+    template.save_template()
     print("All done !")
