@@ -55,7 +55,10 @@ class DBFiles(DBBase):
 
     def get_profile_by_email(self, email):
         path = "candidates/{}/profile.json".format(email)
-        raw_profile = open(path).read()
+        try:
+            raw_profile = open(path).read()
+        except:
+            raise Exception("This candidate does not exist")
         return json.loads(raw_profile)
 
     """
@@ -74,7 +77,10 @@ class DBFiles(DBBase):
 
     @staticmethod
     def delete_directory(path):
-        shutil.rmtree("./{}".format(path))
+        try:
+            shutil.rmtree("./{}".format(path))
+        except Exception as e:
+            raise e
 
     @staticmethod
     def create_file_with_content(path, content):

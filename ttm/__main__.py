@@ -22,8 +22,14 @@ if args["send"]:
     template.save_template()
     print("All done !")
 elif args["show"]:
-    candidate = Candidate.load_candidate(args["<email>"])
-    print(candidate.get_profile())
+    try:
+        candidate = Candidate.load_candidate(args["<email>"])
+        print(candidate.get_profile())
+    except Exception as e:
+        print(e)
 elif args["delete"]:
-    candidate = Candidate.load_candidate(args["<email>"])
-    candidate.delete()
+    try:
+        candidate = Candidate.load_candidate(args["<email>"])
+        candidate.delete()
+    except Exception as e:
+        print(e)
