@@ -8,6 +8,9 @@ Upcoming:
 - show candidate infos
 - set and get reminders so you can sent an email to a candidate who did not deliver his test result on time for instance
 
+## Requirement
+- Python 3.6 or over
+
 ## Installation
 ```
 git clone https://github.com/bastienbot/technical-tests-manager
