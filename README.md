@@ -1,12 +1,10 @@
 # Technical challenges Manager
 
 ## Description
-This program allows you to register a new candidate, send the candidate the suitable challenge (on gitlab: creates user, fork the challenge repository to his/her namespace, send the candidate an email with instructions), and save the email.
-
-Upcoming:
-- delete candidate
-- show candidate infos
-- set and get reminders so you can sent an email to a candidate who did not deliver his/her challenge result on time for instance
+This program allows you to register/delete a new candidate, send the registered candidate a technical challenge. This challenge can be sent with the following methods:
+- sending an email
+- create a user on gitlab and forking a project in the user namespace
+You can also view informations about a registered candidate: name, email, messages sent
 
 ## Requirement
 - Python 3.6 or over
@@ -35,3 +33,6 @@ Copy and fill in the following files according to your needs :
   -h --help     Show this screen.
   --version     Show version.
   ```
+
+## Upcoming:
+- set reminders so you can send an email to a candidate who did not deliver his/her challenge result on time for instance

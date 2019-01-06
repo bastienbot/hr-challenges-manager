@@ -1,18 +1,21 @@
 marketing-event:
-  chalenge-type: default
-  id: reposlug
+  chalenge-type: default (email)
+  name: template-name
 buz-dev:
   chalenge-type: default
-  id: reposlug
+  name: template-name
 csm:
   chalenge-type: default
-  id: reposlug
+  name: template-name
 backend:
-  chalenge-type: gitlab
+  chalenge-type: gitlab (create user / fork repo)
+  name: template-name
   id: reposlug
 frontend:
   chalenge-type: gitlab
+  name: template-name
   id: reposlug
 ds:
   chalenge-type: gitlab
+  name: template-name
   id: reposlug
