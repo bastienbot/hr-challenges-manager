@@ -18,9 +18,9 @@ class Candidate:
         self.lastname = informations["lastname"]
         self.email = informations["email"]
         self.job = informations["job"]
-        self.phone = str
+        self.phone = str()
         self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
-        self.messages = list
+        self.messages = list()
         self.db = DBConnector()
 
     def get_messages(self):
