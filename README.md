@@ -1,4 +1,4 @@
-# Technical challenges Manager
+# HR challenges Manager
 
 ## Description
 This program allows you to register/delete a new candidate, send the registered candidate a technical challenge. This challenge can be sent with the following methods:
@@ -11,8 +11,8 @@ You can also view informations about a registered candidate: name, email, messag
 
 ## Installation
 ```
-git clone https://github.com/bastienbot/technical-challenges-manager
-cd technical-challenges-manager
+git clone https://github.com/bastienbot/hr-challenges-manager
+cd hr-challenges-manager
 pip install -r requirement.txt
 ```
 

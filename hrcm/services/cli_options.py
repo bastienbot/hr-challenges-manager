@@ -1,4 +1,4 @@
-"""Technical challenge Manager
+"""HR challenge Manager
 
 Usage:
   hrcm send <firstname> <lastname> <email> <job>
