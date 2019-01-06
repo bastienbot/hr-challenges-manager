@@ -34,6 +34,16 @@ class Candidate:
         self.db.delete_candidate(self)
         print("User deleted successfuly")
 
+    def get_profile(self):
+        return {
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "email": self.email,
+            "job": self.job,
+            "phone": self.phone,
+            "username": self.username
+        }
+
     """
     @desc Get the candidate profile and returns an instance of Candidate
 
