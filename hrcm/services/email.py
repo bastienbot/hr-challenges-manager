@@ -20,7 +20,7 @@ class EmailSender:
     """
     def send(candidate, content):
         message = MIMEMultipart('alternative')
-        message['Subject'] = "Clevy technical test"
+        message['Subject'] = "Clevy challenge"
         message['From'] = "bastien@clevy.io"
         message['To'] = candidate.email
 

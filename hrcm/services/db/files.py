@@ -1,6 +1,7 @@
 import os
 import json
 import shutil
+import datetime
 from time import time
 from .base import DBBase
 
@@ -62,6 +63,25 @@ class DBFiles(DBBase):
         return json.loads(raw_profile)
 
     """
+    @desc We fetch the files list from the candidate folder,
+            and we format the files to get the timestamps and messages names
+    @returns [ { name: str, timestamp: str } ]
+    """
+    def get_messages(self, candidate):
+        files = DBFiles.list_files(path='candidates/{}'.format(candidate.email))
+        messages = []
+        for f in files:
+            if f != "profile.json":
+                f = f.split("-", 1)
+                messages.append({
+                    "timestamp": f[0],
+                    "ts_str": datetime.datetime.utcfromtimestamp(int(float(f[0]))).strftime('%d-%m-%Y %H:%M:%S'),
+                    "diff_to_today": int(int(time() - int(float(f[0]))) / 60 / 60 / 24),
+                    "name": f[1]
+                })
+        return messages
+
+    """
     @desc Creates a candidate directory if it does not exist already
 
     @params candidate: instance of candidate
@@ -74,6 +94,10 @@ class DBFiles(DBBase):
     def create_directory(path):
         if not os.path.isdir("./{}".format(path)):
             os.makedirs("./{}".format(path))
+
+    @staticmethod
+    def list_files(path):
+        return os.listdir(path=path)
 
     @staticmethod
     def delete_directory(path):

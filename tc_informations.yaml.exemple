@@ -1,0 +1,18 @@
+marketing-event:
+  type: default
+  id: reposlug
+buz-dev:
+  type: default
+  id: reposlug
+csm:
+  type: default
+  id: reposlug
+backend:
+  type: gitlab
+  id: reposlug
+frontend:
+  type: gitlab
+  id: reposlug
+ds:
+  type: gitlab
+  id: reposlug

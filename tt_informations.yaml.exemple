@@ -1,9 +1,0 @@
-backend:
-  - namespace: mynamespace
-  - id: reposlug
-frontend:
-  - namespace: mynamespace
-  - id: reposlug
-ds:
-  - namespace: mynamespace
-  - id: reposlug

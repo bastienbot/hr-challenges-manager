@@ -1,9 +1,8 @@
 import settings
-from classes.template import Template
-from classes.test import TestInterface
-from classes.candidate import Candidate
-from services.gitlab import Gitlab
 from services.cli_options import Arguments
+from classes.candidate import Candidate
+from classes.challenge import ChallengeInterface
+from services.output import show_candidate_informations
 
 
 args = Arguments.get_arguments()
@@ -16,15 +15,13 @@ if args["send"]:
         "job": args["<job>"]
     })
     candidate.create()
-    TestInterface.send_test(candidate)
-    template = Template(name="new_test", candidate=candidate)
-    template.send_template()
-    template.save_template()
+    ChallengeInterface.send_challenge(candidate)
     print("All done !")
 elif args["show"]:
     try:
         candidate = Candidate.load_candidate(args["<email>"])
-        print(candidate.get_profile())
+        candidate.get_messages()
+        show_candidate_informations(candidate)
     except Exception as e:
         print(e)
 elif args["delete"]:

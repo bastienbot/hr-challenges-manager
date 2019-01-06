@@ -1,5 +1,8 @@
+import os
 import json
+from datetime import datetime
 from services.db import DBConnector
+from services.files import FileInterface
 
 
 class Candidate:
@@ -15,19 +18,13 @@ class Candidate:
         self.lastname = informations["lastname"]
         self.email = informations["email"]
         self.job = informations["job"]
-        self.phone = ""
+        self.phone = str
         self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
+        self.messages = list
         self.db = DBConnector()
 
-    def get_profile(self):
-        return {
-            "firstname": self.firstname,
-            "lastname": self.lastname,
-            "email": self.email,
-            "job": self.job,
-            "phone": self.phone,
-            "username": self.username
-        }
+    def get_messages(self):
+        self.messages = self.db.get_messages(self)
 
     def create(self):
         self.db.create_candidate(self)
@@ -43,8 +40,8 @@ class Candidate:
     @params email: str
     @returns instance of Candidate
     """
-    @staticmethod
-    def load_candidate(email):
+    @classmethod
+    def load_candidate(cls, email):
         db = DBConnector()
         profile = db.get_profile_by_email(email)
-        return Candidate(profile)
+        return cls(profile)

@@ -1,8 +1,8 @@
 .todo
 
 candidates
-tt_informations.yaml
-templates/new_test.txt
+tc_informations.yaml
+templates/new_challenge.txt
 templates/signature.txt
 
 # Byte-compiled / optimized / DLL files
