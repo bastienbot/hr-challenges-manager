@@ -8,9 +8,9 @@ class ChallengeInterface:
     @classmethod
     def send_challenge(cls, candidate):
         job_settings = YamlInterface.load_job_settings(candidate.job)
-        if job_settings["type"] == "default":
+        if job_settings["chalenge-type"] == "default":
             return cls.__send_default_challenge(candidate, job_settings)
-        elif job_settings["type"] == "gitlab":
+        elif job_settings["chalenge-type"] == "gitlab":
             return cls.__send_gitlab_challenge(candidate, job_settings)
 
     def __send_default_challenge(candidate, job_settings):

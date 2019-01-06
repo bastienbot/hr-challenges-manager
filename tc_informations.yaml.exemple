@@ -1,18 +1,18 @@
 marketing-event:
-  type: default
+  chalenge-type: default
   id: reposlug
 buz-dev:
-  type: default
+  chalenge-type: default
   id: reposlug
 csm:
-  type: default
+  chalenge-type: default
   id: reposlug
 backend:
-  type: gitlab
+  chalenge-type: gitlab
   id: reposlug
 frontend:
-  type: gitlab
+  chalenge-type: gitlab
   id: reposlug
 ds:
-  type: gitlab
+  chalenge-type: gitlab
   id: reposlug
