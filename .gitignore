@@ -2,8 +2,7 @@
 
 candidates
 tc_informations.yaml
-templates/new_challenge.txt
-templates/signature.txt
+templates/*.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
