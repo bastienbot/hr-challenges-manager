@@ -55,3 +55,14 @@ class Candidate:
         db = DBConnector()
         profile = db.get_profile_by_email(email)
         return cls(profile)
+
+    """
+    @desc Get all the candidates and return an list of Candidate instances
+
+    @returns [instance of Candidate]
+    """
+    @classmethod
+    def load_candidates(cls):
+        db = DBConnector()
+        emails = db.get_candidates_emails()
+        return [cls(db.get_profile_by_email(email)) for email in emails]

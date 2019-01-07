@@ -62,6 +62,9 @@ class DBFiles(DBBase):
             raise Exception("This candidate does not exist")
         return json.loads(raw_profile)
 
+    def get_candidates_emails(self):
+        return DBFiles.list_files(path='candidates')
+
     """
     @desc We fetch the files list from the candidate folder,
             and we format the files to get the timestamps and messages names

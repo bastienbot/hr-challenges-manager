@@ -23,8 +23,16 @@ Copy and fill in the following files according to your needs :
 
 ## Usage:
   ```
+  # Create a new candidate in db and send the suitable challenge
   python hrcm send <firstname> <lastname> <email> <job>
+
+  # Show all candidates followed by last message date and time
+  python hrcm candidates
+
+  # Show informations about a specific candidate
   python hrcm show <email>
+
+  # Delete candidate from DB
   python hrcm delete <email>
   ```
 

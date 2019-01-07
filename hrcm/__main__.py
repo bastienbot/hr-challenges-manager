@@ -2,7 +2,7 @@ import settings
 from services.cli_options import Arguments
 from classes.candidate import Candidate
 from classes.challenge import ChallengeInterface
-from services.output import show_candidate_informations
+from services.output import show_candidate_informations, show_candidates
 
 
 args = Arguments.get_arguments()
@@ -17,6 +17,12 @@ if args["send"]:
     candidate.create()
     ChallengeInterface.send_challenge(candidate)
     print("All done !")
+elif args["candidates"]:
+    try:
+        candidates = Candidate.load_candidates()
+        show_candidates(candidates)
+    except Exception as e:
+        print(e)
 elif args["show"]:
     try:
         candidate = Candidate.load_candidate(args["<email>"])
