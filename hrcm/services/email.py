@@ -19,10 +19,16 @@ class EmailSender:
     @returns
     """
     def send(candidate, content):
+        # Recipients list is declared
+        rcpt = [candidate.email]
         message = MIMEMultipart('alternative')
         message['Subject'] = "Clevy challenge"
         message['From'] = "bastien@clevy.io"
         message['To'] = candidate.email
+        if os.getenv("BCC_EMAIL") is not None and len(os.getenv("BCC_EMAIL")) > 5:
+            # We add BCC to recipients list if needed
+            message['Bcc'] = os.getenv("BCC_EMAIL")
+            rcpt.append(message['Bcc'])
 
         html = content
         mime_text = MIMEText(html, 'html')
@@ -30,6 +36,7 @@ class EmailSender:
 
         s = smtplib.SMTP(EmailSender.EMAIL_HOST, EmailSender.EMAIL_PORT)
         s.starttls()
+        # We add the recipients list as param
         s.login(EmailSender.EMAIL_HOST_USER, EmailSender.EMAIL_HOST_PASSWORD)
-        s.sendmail(message["From"], message["To"], message.as_string())
+        s.sendmail(message["From"], rcpt, message.as_string())
         s.quit()
