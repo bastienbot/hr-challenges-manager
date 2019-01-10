@@ -25,14 +25,17 @@ class Candidate:
 
     def get_messages(self):
         self.messages = self.db.get_messages(self)
+        return self
 
     def create(self):
         self.db.create_candidate(self)
         print("User created successfuly")
+        return self
 
     def delete(self):
         self.db.delete_candidate(self)
         print("User deleted successfuly")
+        return self
 
     def get_profile(self):
         return {
@@ -65,4 +68,6 @@ class Candidate:
     def load_candidates(cls):
         db = DBConnector()
         emails = db.get_candidates_emails()
-        return [cls(db.get_profile_by_email(email)) for email in emails]
+        candidates = [cls(db.get_profile_by_email(email)).get_messages() for email in emails]
+        # return [candidate.get_messages() for candidate in candidates]
+        return candidates
