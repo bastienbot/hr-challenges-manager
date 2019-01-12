@@ -26,6 +26,9 @@ Copy and fill in the following files according to your needs :
   # Create a new candidate in db and send the suitable challenge
   python hrcm send <firstname> <lastname> <email> <job>
 
+  # Archive a candidate
+  python hrcm archive <email>
+
   # Show all candidates followed by last message date and time
   python hrcm candidates
 
