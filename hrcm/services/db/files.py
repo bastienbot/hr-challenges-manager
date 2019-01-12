@@ -25,7 +25,7 @@ class DBFiles(DBBase):
     """
     def create_candidate(self, candidate):
         DBFiles.create_candidate_folder_if_not_exists(candidate)
-        DBFiles.save_profile(candidate)
+        self.save_profile(candidate)
         return candidate
 
     def delete_candidate(self, candidate):
