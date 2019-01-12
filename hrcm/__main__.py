@@ -19,7 +19,7 @@ if args["send"]:
     print("All done !")
 elif args["candidates"]:
     try:
-        candidates = Candidate.load_candidates()
+        candidates = Candidate.load_candidates(archive=False)
         show_candidates(candidates)
     except Exception as e:
         print(e)
