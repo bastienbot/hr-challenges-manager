@@ -1,8 +1,8 @@
 import settings
-from services.cli_options import Arguments
+from services.cli.options import Arguments
 from classes.candidate import Candidate
 from classes.challenge import ChallengeInterface
-from services.output import show_candidate_informations, show_candidates
+from services.cli.output import show_candidate_informations, show_candidates
 
 
 args = Arguments.get_arguments()
