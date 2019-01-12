@@ -38,6 +38,12 @@ class Candidate:
         print("User deleted successfuly")
         return self
 
+    def archive(self):
+        self.archived = True
+        self.db.save_profile(self)
+        print("Candidate archived")
+        return self
+
     def get_profile(self):
         return {
             "firstname": self.firstname,
@@ -45,7 +51,8 @@ class Candidate:
             "email": self.email,
             "job": self.job,
             "phone": self.phone,
-            "username": self.username
+            "username": self.username,
+            "archived": self.archived
         }
 
     """

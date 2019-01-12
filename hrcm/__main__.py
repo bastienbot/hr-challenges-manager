@@ -17,6 +17,12 @@ if args["send"]:
     candidate.create()
     ChallengeInterface.send_challenge(candidate)
     print("All done !")
+elif args["archive"]:
+    try:
+        candidate = Candidate.load_candidate(args["<email>"])
+        candidate.archive()
+    except Exception as e:
+        print(e)
 elif args["candidates"]:
     try:
         candidates = Candidate.load_candidates(archive=False)

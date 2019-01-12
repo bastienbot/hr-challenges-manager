@@ -25,10 +25,7 @@ class DBFiles(DBBase):
     """
     def create_candidate(self, candidate):
         DBFiles.create_candidate_folder_if_not_exists(candidate)
-        DBFiles.create_file_with_content(
-            path="candidates/{}/profile.json".format(candidate.email),
-            content="{}".format(json.dumps(candidate.get_profile()))
-        )
+        DBFiles.save_profile(candidate)
         return candidate
 
     def delete_candidate(self, candidate):
@@ -64,6 +61,12 @@ class DBFiles(DBBase):
 
     def get_candidates_emails(self):
         return DBFiles.list_files(path='candidates')
+
+    def save_profile(self, candidate):
+        DBFiles.create_file_with_content(
+            path="candidates/{}/profile.json".format(candidate.email),
+            content="{}".format(json.dumps(candidate.get_profile()))
+        )
 
     """
     @desc We fetch the files list from the candidate folder,
