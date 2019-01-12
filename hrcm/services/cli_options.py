@@ -2,6 +2,7 @@
 
 Usage:
   hrcm send <firstname> <lastname> <email> <job>
+  hrcm archive <email>
   hrcm candidates
   hrcm show <email>
   hrcm delete <email>

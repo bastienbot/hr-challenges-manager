@@ -21,6 +21,7 @@ class Candidate:
         self.phone = str()
         self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
         self.messages = list()
+        self.archived = informations["archived"] if "archived" in informations else False
         self.db = DBConnector()
 
     def get_messages(self):
@@ -37,6 +38,12 @@ class Candidate:
         print("User deleted successfuly")
         return self
 
+    def archive(self):
+        self.archived = True
+        self.db.save_profile(self)
+        print("Candidate archived")
+        return self
+
     def get_profile(self):
         return {
             "firstname": self.firstname,
@@ -44,7 +51,8 @@ class Candidate:
             "email": self.email,
             "job": self.job,
             "phone": self.phone,
-            "username": self.username
+            "username": self.username,
+            "archived": self.archived
         }
 
     """
@@ -61,13 +69,14 @@ class Candidate:
 
     """
     @desc Get all the candidates and return an list of Candidate instances
+            The archive option tells if the method returns the (non-)archived candidates
 
+    @params: archive: bool
     @returns [instance of Candidate]
     """
     @classmethod
-    def load_candidates(cls):
+    def load_candidates(cls, archive=False):
         db = DBConnector()
         emails = db.get_candidates_emails()
-        candidates = [cls(db.get_profile_by_email(email)).get_messages() for email in emails]
-        # return [candidate.get_messages() for candidate in candidates]
-        return candidates
+        candidates = [cls(db.get_profile_by_email(email)) for email in emails]
+        return [candidate.get_messages() for candidate in candidates if candidate.archived == archive]

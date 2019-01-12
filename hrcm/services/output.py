@@ -22,7 +22,7 @@ def show_candidate_informations(candidate):
 
 def show_candidates(candidates):
     for candidate in candidates:
-        print("Firstname: {0}, Lastname: {1}, Email address: {2}, Job: {3}".format(candidate.firstname, candidate.lastname, candidate.email, candidate.job))
+        print("\nFirstname: {0}, Lastname: {1}, Email address: {2}, Job: {3}".format(candidate.firstname, candidate.lastname, candidate.email, candidate.job))
         for message in candidate.messages:
             print("\t{0} sent : {1}, {2} days ago".format(
                 message["name"],
