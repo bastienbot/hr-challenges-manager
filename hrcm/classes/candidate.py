@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from services.db import DBConnector
 from services.files import FileInterface
+from services.helpers import normalize_dict
 
 
 class Candidate:
@@ -14,6 +15,7 @@ class Candidate:
     @returns
     """
     def __init__(self, informations):
+        normalize_dict(informations, {"archived": False})
         self.firstname = informations["firstname"]
         self.lastname = informations["lastname"]
         self.email = informations["email"]
@@ -21,7 +23,7 @@ class Candidate:
         self.phone = str()
         self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
         self.messages = list()
-        self.archived = informations["archived"] if "archived" in informations else False
+        self.archived = informations["archived"]
         self.db = DBConnector()
 
     def get_messages(self):
