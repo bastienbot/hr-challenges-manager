@@ -11,3 +11,10 @@ def normalize_dict(target_dict, default_dict):
     for prop, value in default_dict.items():
         target_dict[prop] = target_dict[prop] if prop in target_dict else value
     return target_dict
+
+
+def format_username(firstname, lastname):
+    return "{}.{}.external".format(
+        ''.join(e for e in firstname if e.isalnum()),
+        ''.join(e for e in lastname if e.isalnum())
+    ).lower()

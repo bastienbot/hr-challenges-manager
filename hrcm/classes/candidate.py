@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from services.db import DBConnector
 from services.files import FileInterface
-from services.helpers import normalize_dict
+from helpers import normalize_dict, format_username
 
 
 class Candidate:
@@ -21,7 +21,7 @@ class Candidate:
         self.email = informations["email"]
         self.job = informations["job"]
         self.phone = str()
-        self.username = "{}.{}.external".format(self.firstname, self.lastname).lower()
+        self.username = format_username(informations["firstname"], informations["lastname"])
         self.messages = list()
         self.archived = informations["archived"]
         self.db = DBConnector()
