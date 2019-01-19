@@ -1,3 +1,10 @@
+import unicodedata
+
+
+def strip_accents(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+
+
 def normalize_dict(target_dict, default_dict):
     """
     @desc This function sets defaults values for a existing dict
@@ -14,7 +21,7 @@ def normalize_dict(target_dict, default_dict):
 
 
 def format_username(firstname, lastname):
-    return "{}.{}.external".format(
+    return strip_accents("{}.{}.external".format(
         ''.join(e for e in firstname if e.isalnum()),
         ''.join(e for e in lastname if e.isalnum())
-    ).lower()
+    ).lower())
