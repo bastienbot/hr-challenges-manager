@@ -11,11 +11,12 @@ class Candidate:
     """
     @desc We prepare all the instance parameters along side the db instance
 
-    @params informations: a lsit of cli parameters
+    @params informations: a list of cli parameters
     @returns
     """
     def __init__(self, informations):
         normalize_dict(informations, {"archived": False})
+        self.id = informations["_id"]
         self.firstname = informations["firstname"]
         self.lastname = informations["lastname"]
         self.email = informations["email"]
@@ -30,6 +31,13 @@ class Candidate:
         self.messages = self.db.get_messages(self)
         return self
 
+    """
+    @desc This methods create a new candidate and adds its id to self when
+            the DB requires an id
+
+    @params self: instance of Candidate
+    @returns instance of Candidate
+    """
     def create(self):
         self.db.create_candidate(self)
         print("User created successfuly")

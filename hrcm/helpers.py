@@ -25,3 +25,15 @@ def format_username(firstname, lastname):
         ''.join(e for e in firstname if e.isalnum()),
         ''.join(e for e in lastname if e.isalnum())
     ).lower())
+
+
+def decode_object(obj):
+    for key, value in obj.items():
+        if type(obj[key]) == bytes:
+            obj[key] = obj[key].decode("utf-8")
+    return obj
+
+
+def decode_objects(objects):
+    decoded = [decode_object(obj) for obj in objects]
+    return decoded

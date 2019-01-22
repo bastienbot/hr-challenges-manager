@@ -1,5 +1,7 @@
 .todo
 
+mongodb/
+
 candidates
 tc_informations.yaml
 templates/*.html
