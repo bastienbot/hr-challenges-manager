@@ -1,6 +1,7 @@
 import os
 import json
 from datetime import datetime
+from .challenge import Challenge
 from services.db import DBConnector
 from helpers import format_username
 
@@ -26,6 +27,7 @@ class Candidate:
         )
         self.messages = informations.get("messages", list())
         self.archived = informations.get("archived", False)
+        self.challenge = None
         self.db = DBConnector()
 
     def get_messages(self):
@@ -39,7 +41,7 @@ class Candidate:
     @params self: instance of Candidate
     @returns instance of Candidate
     """
-    def create(self):
+    def save(self):
         self.db.create_candidate(self)
         print("User created successfuly")
         return self
@@ -54,6 +56,11 @@ class Candidate:
         self.db.save_profile(self)
         print("Candidate archived")
         return self
+
+    def create_send_challenge(self):
+        self.challenge = Challenge()
+        self.challenge.send_challenge(self)
+        self.messages = self.challenge.get_sent_messages()
 
     def get_profile(self):
         return {
@@ -89,4 +96,4 @@ class Candidate:
     @classmethod
     def load_candidates(cls, archive=False):
         db = DBConnector()
-        return [cls(candidates) for candidate in db.get_candidates(archived=False)]
+        return [cls(candidate) for candidate in db.get_profiles(archived=False)]

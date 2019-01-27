@@ -1,7 +1,6 @@
 import settings
 from services.cli.options import Arguments
 from classes.candidate import Candidate
-from classes.challenge import ChallengeInterface
 from services.cli.output import show_candidate_informations, show_candidates
 
 
@@ -14,8 +13,8 @@ if args["send"]:
         "email": args["<email>"],
         "job": args["<job>"]
     })
-    ChallengeInterface.send_challenge(candidate)
-    candidate.create()
+    candidate.create_send_challenge()
+    candidate.save()
     print("All done !")
 elif args["archive"]:
     try:

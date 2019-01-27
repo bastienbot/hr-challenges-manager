@@ -14,17 +14,17 @@ class EmailSender:
     """
     @desc Sends an email with an html body to a candidate through SES
 
-    @params candidate: instance of Candidate
+    @params profile: dict
     @params content: str
     @returns
     """
-    def send(candidate, content):
+    def send(profile, content):
         # Recipients list is declared
-        rcpt = [candidate.email]
+        rcpt = [profile.get("email")]
         message = MIMEMultipart('alternative')
         message['Subject'] = "Clevy challenge"
         message['From'] = "bastien@clevy.io"
-        message['To'] = candidate.email
+        message['To'] = profile.get("email")
         if os.getenv("BCC_EMAIL") is not None and len(os.getenv("BCC_EMAIL")) > 5:
             # We add BCC to recipients list if needed
             message['Bcc'] = os.getenv("BCC_EMAIL")

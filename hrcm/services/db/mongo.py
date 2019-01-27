@@ -47,7 +47,7 @@ class DBMongo(DBBase):
         profile = self.candidates_col.find_one({"email": email})
         return profile
 
-    def get_profiles(self):
+    def get_profiles(self, archived):
         profiles = self.candidates_col.find()
         return profiles
 
