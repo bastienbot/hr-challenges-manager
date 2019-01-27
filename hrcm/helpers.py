@@ -5,35 +5,8 @@ def strip_accents(s):
     return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
 
 
-def normalize_dict(target_dict, default_dict):
-    """
-    @desc This function sets defaults values for a existing dict
-            giving an other dict containing default values.
-            This is mostly used to assign a bunch of object props whithout validation
-
-    @params target_dict: dict
-    @params default_dict: dict
-    @returns default_dict: dict
-    """
-    for prop, value in default_dict.items():
-        target_dict[prop] = target_dict[prop] if prop in target_dict else value
-    return target_dict
-
-
 def format_username(firstname, lastname):
     return strip_accents("{}.{}.external".format(
         ''.join(e for e in firstname if e.isalnum()),
         ''.join(e for e in lastname if e.isalnum())
     ).lower())
-
-
-def decode_object(obj):
-    for key, value in obj.items():
-        if type(obj[key]) == bytes:
-            obj[key] = obj[key].decode("utf-8")
-    return obj
-
-
-def decode_objects(objects):
-    decoded = [decode_object(obj) for obj in objects]
-    return decoded

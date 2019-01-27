@@ -2,8 +2,7 @@ import os
 import json
 from datetime import datetime
 from services.db import DBConnector
-from services.files import FileInterface
-from helpers import normalize_dict, format_username
+from helpers import format_username
 
 
 class Candidate:
@@ -15,16 +14,18 @@ class Candidate:
     @returns
     """
     def __init__(self, informations):
-        normalize_dict(informations, {"archived": False})
-        self.id = informations["_id"]
-        self.firstname = informations["firstname"]
-        self.lastname = informations["lastname"]
-        self.email = informations["email"]
-        self.job = informations["job"]
-        self.phone = str()
-        self.username = format_username(informations["firstname"], informations["lastname"])
-        self.messages = list()
-        self.archived = informations["archived"]
+        self.id = informations.get("_id")
+        self.firstname = informations.get("firstname")
+        self.lastname = informations.get("lastname")
+        self.email = informations.get("email")
+        self.job = informations.get("job")
+        self.phone = informations.get("phone", str())
+        self.username = format_username(
+            informations.get("firstname"),
+            informations.get("lastname")
+        )
+        self.messages = informations.get("messages", list())
+        self.archived = informations.get("archived", False)
         self.db = DBConnector()
 
     def get_messages(self):
@@ -61,6 +62,7 @@ class Candidate:
             "email": self.email,
             "job": self.job,
             "phone": self.phone,
+            "messages": self.messages,
             "username": self.username,
             "archived": self.archived
         }
@@ -87,6 +89,4 @@ class Candidate:
     @classmethod
     def load_candidates(cls, archive=False):
         db = DBConnector()
-        emails = db.get_candidates_emails()
-        candidates = [cls(db.get_profile_by_email(email)) for email in emails]
-        return [candidate.get_messages() for candidate in candidates if candidate.archived == archive]
+        return [cls(candidates) for candidate in db.get_candidates(archived=False)]

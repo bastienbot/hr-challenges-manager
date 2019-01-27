@@ -14,8 +14,8 @@ if args["send"]:
         "email": args["<email>"],
         "job": args["<job>"]
     })
-    candidate.create()
     ChallengeInterface.send_challenge(candidate)
+    candidate.create()
     print("All done !")
 elif args["archive"]:
     try:

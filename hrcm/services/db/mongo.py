@@ -40,21 +40,16 @@ class DBMongo(DBBase):
     # @params template: instance of Template
     # @returns
     # """
-    # def save_template(self, candidate, template):
+    def save_template(self, candidate, template):
+        pass
 
     def get_profile_by_email(self, email):
         profile = self.candidates_col.find_one({"email": email})
         return profile
 
-    # def get_candidates_emails(self):
-    #     return profiles
+    def get_profiles(self):
+        profiles = self.candidates_col.find()
+        return profiles
 
-    # def save_profile(self, candidate):
-
-    # """
-    # @desc We fetch the files list from the candidate folder,
-    #         and we format the files to get the timestamps and messages names
-    # @returns [ { name: str, timestamp: str } ]
-    # """
-    # def get_messages(self, candidate):
-    #     return messages
+    def save_profile(self, candidate):
+        pass
