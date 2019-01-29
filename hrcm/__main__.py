@@ -23,11 +23,11 @@ elif args["archive"]:
     except Exception as e:
         print(e)
 elif args["candidates"]:
-    try:
-        candidates = Candidate.load_candidates(archive=False)
-        show_candidates(candidates)
-    except Exception as e:
-        print(e)
+    # try:
+    candidates = Candidate.load_candidates(archive=False)
+    show_candidates(candidates)
+    # except Exception as e:
+    #     raise Exception(e)
 elif args["show"]:
     try:
         candidate = Candidate.load_candidate(args["<email>"])

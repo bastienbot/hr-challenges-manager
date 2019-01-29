@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from .challenge import Challenge
 from services.db import DBConnector
-from helpers import format_username
+from helpers import format_username, format_message
 
 
 class Candidate:
@@ -25,7 +25,7 @@ class Candidate:
             informations.get("firstname"),
             informations.get("lastname")
         )
-        self.messages = informations.get("messages", list())
+        self.messages = [format_message(message) for message in informations.get("messages", list())]
         self.archived = informations.get("archived", False)
         self.challenge = None
         self.db = DBConnector()

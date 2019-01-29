@@ -33,4 +33,4 @@ class Challenge:
     def __send_save_template(self, candidate, name):
         template = Template(name, candidate.get_profile())
         template.send_template()
-        self.sent_messages.append({"message": template.get_template(), "created_at": time()})
+        self.sent_messages.append({"text": template.get_template(), "created_at": time(), "name": name})
