@@ -7,7 +7,7 @@ from services.cli.output import show_candidate_informations, show_candidates
 args = Arguments.get_arguments()
 
 if args["send"]:
-    candidate = Candidate({
+    candidate = Candidate.load_or_new({
         "firstname": args["<firstname>"],
         "lastname": args["<lastname>"],
         "email": args["<email>"],
@@ -31,7 +31,6 @@ elif args["candidates"]:
 elif args["show"]:
     try:
         candidate = Candidate.load_candidate(args["<email>"])
-        candidate.get_messages()
         show_candidate_informations(candidate)
     except Exception as e:
         print(e)

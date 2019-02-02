@@ -30,6 +30,9 @@ class Candidate:
         self.challenge = None
         self.db = DBConnector()
 
+    def __repr__(self):
+        return json.dumps(self.get_profile())
+
     def get_messages(self):
         self.messages = self.db.get_messages(self)
         return self
@@ -75,16 +78,34 @@ class Candidate:
         }
 
     """
+    @desc Get the candidate profile, create a new instance of Candidate it the candidate
+            exists, else create a new one with the profile informations
+
+    @params profile: dict
+    @returns instance of Candidate
+    """
+    @classmethod
+    def load_or_new(cls, profile):
+        loaded_candidate = cls.load_candidate(profile.get("email"))
+        if loaded_candidate is not None:
+            return loaded_candidate
+        else:
+            return cls(profile)
+
+    """
     @desc Get the candidate profile and returns an instance of Candidate
 
     @params email: str
-    @returns instance of Candidate
+    @returns instance of Candidate, or None
     """
     @classmethod
     def load_candidate(cls, email):
         db = DBConnector()
-        profile = db.get_profile_by_email(email)
-        return cls(profile)
+        try:
+            profile = db.get_profile_by_email(email)
+            return cls(profile)
+        except:
+            return None
 
     """
     @desc Get all the candidates and return an list of Candidate instances
