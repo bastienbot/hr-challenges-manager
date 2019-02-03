@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "HRCM Started"
-while :
-do
-	sleep 1
-done
+flask run --host=0.0.0.0 --port=5100 --debugger
+# while :
+# do
+# 	sleep 1
+# done
