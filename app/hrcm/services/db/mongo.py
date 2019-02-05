@@ -19,14 +19,17 @@ class DBMongo(DBBase):
         self.candidates_col = self.db.candidates
 
     """
-    @desc Create new candidate
+    @desc Create new candidate. We need to stringify the inserted_id in order to be able
+            to serialize it as json.
+            As of now we wamt to be able to duplicate a candidate as people might want to
+            apply for several jobs.
 
     @params instance of Candidate
     @returns instance of Candidate
     """
     def create_candidate(self, candidate):
         doc = self.candidates_col.insert_one(candidate.get_profile())
-        candidate.id = doc.inserted_id
+        candidate.id = str(doc.inserted_id)
         return candidate
 
     def delete_candidate(self, candidate):
@@ -50,6 +53,3 @@ class DBMongo(DBBase):
     def get_profiles(self, archived):
         profiles = self.candidates_col.find()
         return profiles
-
-    def save_profile(self, candidate):
-        pass

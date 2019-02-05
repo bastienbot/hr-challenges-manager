@@ -2,8 +2,8 @@ import os
 import json
 from datetime import datetime
 from .challenge import Challenge
-from services.db import DBConnector
-from helpers import format_username, format_message
+from hrcm.services.db import DBConnector
+from hrcm.helpers import format_username, format_message
 
 
 class Candidate:
@@ -67,6 +67,7 @@ class Candidate:
 
     def get_profile(self):
         return {
+            "id": self.id,
             "firstname": self.firstname,
             "lastname": self.lastname,
             "email": self.email,

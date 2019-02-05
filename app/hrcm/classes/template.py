@@ -1,7 +1,7 @@
 from pathlib import Path
-from services.db import DBConnector
-from services.email import EmailSender
-from services.cli.input import display_and_confirm
+from hrcm.services.db import DBConnector
+from hrcm.services.email import EmailSender
+from hrcm.services.cli.input import display_and_confirm
 
 
 class Template:

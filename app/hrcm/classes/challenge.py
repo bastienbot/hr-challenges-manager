@@ -1,7 +1,7 @@
 from time import time
 from .template import Template
-from services.gitlab import Gitlab
-from services.yaml import YamlInterface
+from hrcm.services.gitlab import Gitlab
+from hrcm.services.yaml import YamlInterface
 
 
 class Challenge:
