@@ -2,9 +2,11 @@
 
 mongodb/
 
+reqs/
+
 candidates
 tc_informations.yaml
-templates/*.html
+app/templates/*.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
