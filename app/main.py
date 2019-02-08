@@ -8,6 +8,8 @@ app = Flask(__name__)
 api = Api(app)
 
 api.add_resource(Candidates, "/candidates", "/candidates/<string:email>")
+
+
 @app.route("/")
 def hello():
     return "Zog zog"

@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from .challenge import Challenge
 from hrcm.services.db import DBConnector
+from hrcm.errors.bad_request import BadRequest
 from hrcm.helpers import format_username, format_message
 
 
@@ -15,7 +16,7 @@ class Candidate:
     @returns
     """
     def __init__(self, informations):
-        self.id = informations.get("_id")
+        self._id = informations.get("_id", None)
         self.firstname = informations.get("firstname")
         self.lastname = informations.get("lastname")
         self.email = informations.get("email")
@@ -39,15 +40,22 @@ class Candidate:
 
     """
     @desc This methods create a new candidate and adds its id to self when
-            the DB requires an id
+            the DB requires an id, we first want to check if the user
+            doesn't already exist, only if the id is not yet set
 
     @params self: instance of Candidate
     @returns instance of Candidate
     """
-    def save(self):
+    def create(self):
+        profile = self.db.get_profile_by_email(self.email)
+        if self._id is not None or profile is not None:
+            raise BadRequest("This email already exists.")
         self.db.create_candidate(self)
         print("User created successfuly")
         return self
+
+    def update(self):
+        self.db.update_candidate(self)
 
     def delete(self):
         self.db.delete_candidate(self)
@@ -65,9 +73,8 @@ class Candidate:
         self.challenge.send_challenge(self)
         self.messages = self.challenge.get_sent_messages()
 
-    def get_profile(self):
-        return {
-            "id": str(self.id),
+    def get_profile(self, show_id=True):
+        profile = {
             "firstname": self.firstname,
             "lastname": self.lastname,
             "email": self.email,
@@ -77,6 +84,10 @@ class Candidate:
             "username": self.username,
             "archived": self.archived
         }
+        if show_id is True:
+            profile["_id"] = str(self._id)
+        return profile
+
 
     """
     @desc Get the candidate profile, create a new instance of Candidate it the candidate

@@ -7,21 +7,27 @@ from hrcm.errors.resource_not_found import ResourceNotFound
 class Candidates(Resource):
 
     def get(self, email):
-        print(email)
         candidate = Candidate.load_candidate(email)
-        try:
+        if candidate is not None:
             return candidate.get_profile()
-        except:
+        else:
             raise ResourceNotFound("This candidate does not exist.")
 
     def post(self):
         args = request.get_json()
         candidate = Candidate(args)
-        candidate.save()
+        candidate.create()
         return candidate.get_profile()
 
     def put(self):
-        return "put endpoint"
+        args = request.get_json()
+        candidate = Candidate.load_candidate(args["email"])
+        if candidate is not None:
+            [setattr(candidate, key, args.get(key)) for key in args.keys()]
+            candidate.update()
+            return candidate.get_profile()
+        else:
+            raise ResourceNotFound("This candidate does not exist.")
 
     def delete(self):
         return "delete endpoint"
