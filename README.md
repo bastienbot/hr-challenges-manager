@@ -1,6 +1,6 @@
 # HR challenges Manager
-
-## Description
+WIP
+<!-- ## Description
 This program allows you to register/delete a new candidate, send the registered candidate a technical challenge. This challenge can be sent with the following methods:
 - sending an email
 - create a user on gitlab and forking a project in the user namespace
@@ -46,4 +46,4 @@ Copy and fill in the following files according to your needs :
   ```
 
 ## Upcoming:
-- set reminders so you can send an email to a candidate who did not deliver his/her challenge result on time for instance
+- set reminders so you can send an email to a candidate who did not deliver his/her challenge result on time for instance -->
