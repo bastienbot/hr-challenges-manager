@@ -67,7 +67,7 @@ class Candidate:
 
     def get_profile(self):
         return {
-            "id": self.id,
+            "id": str(self.id),
             "firstname": self.firstname,
             "lastname": self.lastname,
             "email": self.email,

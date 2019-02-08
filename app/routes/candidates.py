@@ -1,11 +1,18 @@
 from flask import request
 from flask_restful import Resource
 from hrcm.classes.candidate import Candidate
+from hrcm.errors.resource_not_found import ResourceNotFound
 
 
 class Candidates(Resource):
-    def get(self):
-        return "get endpoint"
+
+    def get(self, email):
+        print(email)
+        candidate = Candidate.load_candidate(email)
+        try:
+            return candidate.get_profile()
+        except:
+            raise ResourceNotFound("This candidate does not exist.")
 
     def post(self):
         args = request.get_json()
