@@ -29,5 +29,10 @@ class Candidates(Resource):
         else:
             raise ResourceNotFound("This candidate does not exist.")
 
-    def delete(self):
-        return "delete endpoint"
+    def delete(self, email):
+        candidate = Candidate.load_candidate(email)
+        if candidate is not None:
+            candidate.delete()
+            return {"aknowledged": True}
+        else:
+            raise ResourceNotFound("This candidate does not exist.")

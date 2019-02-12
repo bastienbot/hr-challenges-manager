@@ -62,3 +62,16 @@ class TestApi(unittest.TestCase):
             "{}/candidates".format(self.host),
             json=wrong_candidate)
         self.assertEqual(r.status_code, 404)
+
+    def test_05_delete_candidate(self):
+        r = requests.delete(
+            "{0}/candidates/{1}".format(self.host, self.candidate["email"]))
+        res = json.loads(r.content)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("aknowledged", res)
+        self.assertTrue(res["aknowledged"])
+
+    def test_05_delete_wrong_candidate(self):
+        r = requests.delete(
+            "{0}/candidates/{1}err".format(self.host, self.candidate["email"]))
+        self.assertEqual(r.status_code, 404)
