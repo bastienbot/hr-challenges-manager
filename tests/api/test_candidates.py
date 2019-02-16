@@ -75,3 +75,14 @@ class TestApi(unittest.TestCase):
         r = requests.delete(
             "{0}/candidates/{1}err".format(self.host, self.candidate["email"]))
         self.assertEqual(r.status_code, 404)
+
+    def test_06_preview_challenge(self):
+        r = requests.post(
+            "{}/challenge/preview".format(self.host),
+            json={"candidate": self.candidate, "job": "csm"})
+        self.assertEqual(r.status_code, 200)
+        # res = json.loads(r.content)
+        # self.assertDictContainsSubset(self.candidate, res)
+        # self.assertIn("_id", res)
+        # self.assertIsNotNone(res["_id"])
+        # self.assertGreater(len(res["_id"]), 0)
