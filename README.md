@@ -1,5 +1,5 @@
 # HR challenges Manager
-WIP
+
 ## Description
 This program allows you to register/delete a new candidate, send the registered candidate a technical challenge. This challenge can be sent with the following methods:
 - sending an email
@@ -22,9 +22,9 @@ Copy and fill in the following files according to your needs :
 $ docker-compose build && docker-compose up
 ```
 
-## Endpoimts:
+## Endpoints:
   ```
-  # /candidates
+  # /candidates/{email?}
   POST, GET, PUT, DELETE : Standard CRUD
 
   # /challenges/preview
