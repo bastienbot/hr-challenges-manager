@@ -11,6 +11,7 @@ api = Api(app)
 
 app.add_url_rule('/', 'index', index)
 app.add_url_rule('/challenges/preview', 'Challenges preview', Challenges.preview, methods=['POST'])
+app.add_url_rule('/challenges/send', 'Challenges send', Challenges.send, methods=['POST'])
 api.add_resource(Candidates, "/candidates", "/candidates/<string:email>")
 
 register_custom_exceptions(app)

@@ -72,6 +72,11 @@ class Candidate:
         self.challenge = Challenge()
         self.challenge.send_challenge(self)
         self.messages = self.challenge.get_sent_messages()
+        return self
+
+    def preview_challenge(self):
+        self.challenge = Challenge()
+        return self.challenge.preview_challenge(self)
 
     def get_profile(self, show_id=True):
         profile = {
@@ -87,7 +92,6 @@ class Candidate:
         if show_id is True:
             profile["_id"] = str(self._id)
         return profile
-
 
     """
     @desc Get the candidate profile, create a new instance of Candidate it the candidate

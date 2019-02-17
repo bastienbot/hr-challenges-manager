@@ -1,4 +1,6 @@
+import json
 from flask import request
+from hrcm.classes.candidate import Candidate
 
 
 class Challenges():
@@ -6,8 +8,17 @@ class Challenges():
     def preview():
         args = request.get_json()
         job = args.get("job")
-        candidate = args.get("candidate")
-        return str(args)
+        profile = args.get("candidate")
+        candidate = Candidate.load_candidate(profile.get("email"))
+        candidate.job = job
+        rv = candidate.preview_challenge()
+        return json.dumps(rv)
 
     def send():
-        pass
+        args = request.get_json()
+        job = args.get("job")
+        profile = args.get("candidate")
+        candidate = Candidate.load_candidate(profile.get("email"))
+        candidate.job = job
+        candidate.create_send_challenge()
+        return json.dumps(candidate.get_profile())

@@ -34,12 +34,4 @@ class Template:
         return finaltext
 
     def send_template(self):
-        user_choice = display_and_confirm(self.get_template())
-        if user_choice == "Y":
-            EmailSender.send(self.profile, self.get_template())
-        else:
-            raise Exception("Ok, email not sent. Process stopped !")
-
-    def save_template(self):
-        # self.db.save_template(self.candidate, self)
-        pass
+        EmailSender.send(self.profile, self.get_template())

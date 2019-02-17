@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from time import sleep
 
@@ -39,3 +40,10 @@ class Gitlab:
                 "namespace": namespace
             })
         print(r.content)
+
+    def get_project_info(self, project_id):
+        r = requests.get(
+            url="{}/projects/{}".format(self.url, project_id),
+            headers=self.headers)
+        res = json.loads(r.content)
+        return {"name": res.get("name_with_namespace"), "url": res.get("web_url")}

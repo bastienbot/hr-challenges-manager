@@ -63,7 +63,40 @@ class TestApi(unittest.TestCase):
             json=wrong_candidate)
         self.assertEqual(r.status_code, 404)
 
-    def test_05_delete_candidate(self):
+    def test_05_preview_challenge(self):
+        r = requests.post(
+            "{}/challenges/preview".format(self.host),
+            json={"candidate": self.candidate, "job": "csm"})
+        self.assertEqual(r.status_code, 200)
+        res = json.loads(r.content)
+        self.assertIn("template", res)
+
+        r = requests.post(
+            "{}/challenges/preview".format(self.host),
+            json={"candidate": self.candidate, "job": "frontend"})
+        self.assertEqual(r.status_code, 200)
+        res = json.loads(r.content)
+        self.assertIn("template", res)
+        self.assertIn("project", res)
+
+    def test_06_send_challenge(self):
+        r = requests.post(
+            "{}/challenges/send".format(self.host),
+            json={"candidate": self.candidate, "job": "csm"})
+        self.assertEqual(r.status_code, 200)
+        res = json.loads(r.content)
+        self.assertIn("email", res)
+        self.assertIn("messages", res)
+
+        r = requests.post(
+            "{}/challenges/send".format(self.host),
+            json={"candidate": self.candidate, "job": "frontend"})
+        self.assertEqual(r.status_code, 200)
+        res = json.loads(r.content)
+        self.assertIn("email", res)
+        self.assertIn("messages", res)
+
+    def test_07_delete_candidate(self):
         r = requests.delete(
             "{0}/candidates/{1}".format(self.host, self.candidate["email"]))
         res = json.loads(r.content)
@@ -71,18 +104,7 @@ class TestApi(unittest.TestCase):
         self.assertIn("aknowledged", res)
         self.assertTrue(res["aknowledged"])
 
-    def test_05_delete_wrong_candidate(self):
+    def test_08_delete_wrong_candidate(self):
         r = requests.delete(
             "{0}/candidates/{1}err".format(self.host, self.candidate["email"]))
         self.assertEqual(r.status_code, 404)
-
-    def test_06_preview_challenge(self):
-        r = requests.post(
-            "{}/challenge/preview".format(self.host),
-            json={"candidate": self.candidate, "job": "csm"})
-        self.assertEqual(r.status_code, 200)
-        # res = json.loads(r.content)
-        # self.assertDictContainsSubset(self.candidate, res)
-        # self.assertIn("_id", res)
-        # self.assertIsNotNone(res["_id"])
-        # self.assertGreater(len(res["_id"]), 0)

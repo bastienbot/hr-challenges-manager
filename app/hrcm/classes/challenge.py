@@ -10,6 +10,13 @@ class Challenge:
         self.processed = False
         self.sent_messages = list()
 
+    def preview_challenge(self, candidate):
+        job_settings = YamlInterface.load_job_settings(candidate.job)
+        if job_settings["chalenge-type"] == "default":
+            return self.__preview_default_challenge(candidate, job_settings)
+        elif job_settings["chalenge-type"] == "gitlab":
+            return self.__preview_gitlab_challenge(candidate, job_settings)
+
     def send_challenge(self, candidate):
         job_settings = YamlInterface.load_job_settings(candidate.job)
         if job_settings["chalenge-type"] == "default":
@@ -34,3 +41,13 @@ class Challenge:
         template = Template(name, candidate.get_profile())
         template.send_template()
         self.sent_messages.append({"text": template.get_template(), "created_at": time(), "name": name})
+
+    def __preview_default_challenge(self, candidate, job_settings):
+        template = Template(job_settings["name"], candidate.get_profile())
+        return {"template": template.get_template()}
+
+    def __preview_gitlab_challenge(self, candidate, job_settings):
+        template = Template(job_settings["name"], candidate.get_profile())
+        gitlab_api = Gitlab()
+        project = gitlab_api.get_project_info(job_settings["id"])
+        return {"project": project, "template": template.get_template()}
