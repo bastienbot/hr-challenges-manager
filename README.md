@@ -7,7 +7,7 @@ This program allows you to register/delete a new candidate, send the registered 
 You can also view informations about a registered candidate: name, email, messages sent
 
 ## Requirement
-- Python 3.6 or over
+Docker
 
 ## Installation
 ```
