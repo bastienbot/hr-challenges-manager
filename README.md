@@ -30,7 +30,7 @@ $ docker-compose build && docker-compose up
   # /challenges/preview
   POST : Preview a challenge before sending to a candidate
 
-  # /challenges/preview
+  # /challenges/send
   POST : Send a challenge to a candidate
   ```
 
