@@ -19,7 +19,8 @@ def temp():
         autoescape=select_autoescape(['html'])
     )
     template = env.get_template('csm.html')
-    parsed_content = env.parse(template)
+    template_source = env.loader.get_source(env, 'csm.html')[0]
+    parsed_content = env.parse(template_source)
     print(meta.find_undeclared_variables(parsed_content))
     return template.render({"firstname": "Bastien"})
 app.add_url_rule('/temp', 'Temp', temp, methods=['GET'])
