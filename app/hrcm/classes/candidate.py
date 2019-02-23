@@ -78,6 +78,10 @@ class Candidate:
         self.challenge = Challenge()
         return self.challenge.preview_challenge(self)
 
+    def evaluate_candidate(self):
+        self.challenge = Challenge()
+        return self.challenge.get_evalution_criterias(self)
+
     def get_profile(self, show_id=True):
         profile = {
             "firstname": self.firstname,

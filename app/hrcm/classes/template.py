@@ -10,21 +10,18 @@ class Template:
     def __init__(self, name, profile):
         self.name = name
         self.profile = profile
-        self.finaltext = self.prepare_final_text(name)
         self.env = Environment(
             loader=FileSystemLoader('templates/jinja'),
             autoescape=select_autoescape(['html'])
         )
+        self.finaltext = self.prepare_final_text(name)
 
     def get_template(self):
         return self.finaltext
 
-    def load_file(self, file):
-        path = Path.cwd() / 'templates' / '{}.html'.format(file)
-        return open(path).read()
-
     def get_missing_variables(self):
-        template_source = self.env.loader.get_source(self.env, '{}.html'.format(self.name))[0]
+        template_source = self.env.loader.get_source(
+            self.env, '{}.html'.format(self.name))[0]
         parsed_content = self.env.parse(template_source)
         variables = meta.find_undeclared_variables(parsed_content)
         return [variable for variable in variables if variable not in self.profile]
