@@ -45,6 +45,7 @@ class Challenge:
     def __preview_default_challenge(self, candidate, job_settings):
         template = Template(job_settings["name"], candidate.get_profile())
         return {"template": template.get_template()}
+        # return {"template": template.get_missing_variables()}
 
     def __preview_gitlab_challenge(self, candidate, job_settings):
         template = Template(job_settings["name"], candidate.get_profile())
