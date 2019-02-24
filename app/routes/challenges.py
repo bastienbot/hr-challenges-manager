@@ -26,7 +26,15 @@ class Challenges():
     def evaluation():
         args = request.get_json()
         profile = args.get("candidate")
+        evaluated_criterias = args.get("evaluated_criterias")
         candidate = Candidate.load_candidate(profile.get("email"))
         candidate.job = profile.get("job")
-        evaluation = candidate.evaluate_candidate()
+        evaluation = candidate.evaluate_candidate(evaluated_criterias)
         return json.dumps(evaluation)
+
+    def criterias():
+        args = request.get_json()
+        profile = args.get("candidate")
+        candidate = Candidate.load_candidate(profile.get("email"))
+        candidate.job = profile.get("job")
+        return json.dumps(candidate.get_challenge_criterias())

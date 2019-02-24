@@ -78,7 +78,11 @@ class Candidate:
         self.challenge = Challenge()
         return self.challenge.preview_challenge(self)
 
-    def evaluate_candidate(self):
+    def evaluate_candidate(self, evaluated_criterias):
+        self.challenge = Challenge()
+        return self.challenge.evaluate_challenge(self, evaluated_criterias)
+
+    def get_challenge_criterias(self):
         self.challenge = Challenge()
         return self.challenge.get_evalution_criterias(self)
 

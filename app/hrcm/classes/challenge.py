@@ -37,6 +37,11 @@ class Challenge:
             "question": variable_to_question(variable)}
             for variable in template.get_missing_variables()]
 
+    def evaluate_challenge(self, candidate, evaluated_criterias):
+        job_settings = YamlInterface.load_job_settings(candidate.job)
+        template = Template(job_settings["name"], candidate.get_profile())
+        return template.prepare_final_text(evaluated_criterias)
+
     def __send_default_challenge(self, candidate, job_settings):
         self.__send_save_template(candidate, job_settings["name"])
 
@@ -65,6 +70,3 @@ class Challenge:
         gitlab_api = Gitlab()
         project = gitlab_api.get_project_info(job_settings["id"])
         return {"project": project, "template": template.get_template()}
-
-    def _evalate_challenge(self):
-        pass

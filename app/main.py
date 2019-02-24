@@ -40,6 +40,11 @@ app.add_url_rule(
     'Challenge evaluation',
     Challenges.evaluation,
     methods=['POST'])
+app.add_url_rule(
+    '/challenges/evaluation/criterias',
+    'Challenge evaluations criterias',
+    Challenges.criterias,
+    methods=['POST'])
 api.add_resource(Candidates, "/candidates", "/candidates/<string:email>")
 
 register_custom_exceptions(app)

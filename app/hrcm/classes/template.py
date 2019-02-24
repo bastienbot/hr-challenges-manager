@@ -14,7 +14,7 @@ class Template:
             loader=FileSystemLoader('templates/jinja'),
             autoescape=select_autoescape(['html'])
         )
-        self.finaltext = self.prepare_final_text(name)
+        self.finaltext = self.prepare_final_text()
 
     def get_template(self):
         return self.finaltext
@@ -26,9 +26,11 @@ class Template:
         variables = meta.find_undeclared_variables(parsed_content)
         return [variable for variable in variables if variable not in self.profile]
 
-    def prepare_final_text(self, name):
+    def prepare_final_text(self, evaluated_criterias={}):
+        print(self.profile)
+        print("evaluated_criterias", evaluated_criterias)
         template = self.env.get_template('{}.html'.format(self.name))
-        return template.render({"firstname": "Bastien"})
+        return template.render(dict(self.profile, **evaluated_criterias))
 
     def send_template(self):
         EmailSender.send(self.profile, self.get_template())
