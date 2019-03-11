@@ -3,6 +3,7 @@
 mongodb/
 
 reqs/
+tests/routes.sh
 
 candidates
 tc_informations.yaml
